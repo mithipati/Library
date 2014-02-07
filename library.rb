@@ -43,12 +43,16 @@ class Borrower
 end
 
 class Library
+  attr_accessor :available_books
+  attr_accessor :borrowed_books
   attr_reader :books
 
   def initialize
     @books = []
     @borrowers = []
     @borrower_names = []
+    @available_books = []
+    @borrowed_books = []
   end
 
   def register_new_book(new_book)
@@ -64,6 +68,7 @@ class Library
               @borrowers << { borrower.name => book_id }
               @borrower_names << borrower.name
               book.check_out
+              @books.delete(book)
               return book
             end
         end
@@ -80,11 +85,9 @@ class Library
     end
   end
 
-
   def check_in_book(book)
     book.check_in
   end
-
 
   def get_borrower(book_id)
     @borrowers.each do |borrower_hash|
@@ -99,11 +102,11 @@ class Library
   end
 
 
-
-
   def available_books
+    @available_books = @books
   end
 
   def borrowed_books
+
   end
 end
