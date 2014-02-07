@@ -48,6 +48,7 @@ class Library
   def initialize
     @books = []
     @borrowers = []
+    @borrower_names = []
   end
 
   def register_new_book(new_book)
@@ -59,14 +60,26 @@ class Library
     @books.each do |book|
       if book.status == "available"
         if book.id == book_id
-          @borrowers << { borrower.name => book_id }
-          book.check_out
-          return book
+            if borrower_limit?(borrower.name)
+              @borrowers << { borrower.name => book_id }
+              @borrower_names << borrower.name
+              book.check_out
+              return book
+            end
         end
       end
     end
     return nil
   end
+
+  def borrower_limit?(borrower)
+    if @borrower_names.count(borrower) == 2
+      return false
+    else
+      return true
+    end
+  end
+
 
   def check_in_book(book)
     book.check_in
