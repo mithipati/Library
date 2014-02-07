@@ -53,12 +53,25 @@ class Library
   def check_out_book(book_id, borrower)
     @books.each do |book|
       if book.id == book_id
-        @borrowers << { borrower => book_id }
+        @borrowers << { borrower.name => book_id }
         book.check_out
       end
     end
-
   end
+
+  def get_borrower(book_id)
+    @borrowers.each do |borrower_hash|
+      borrower_hash.each do |k,v|
+        if v == book_id
+          return k
+        else
+          puts "This book has not been checked out yet"
+        end
+      end
+    end
+  end
+
+
 
   def check_in_book(book)
   end
