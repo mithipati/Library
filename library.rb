@@ -42,6 +42,7 @@ class Library
 
   def initialize
     @books = []
+    @borrowers = []
   end
 
   def register_new_book(new_book)
@@ -50,6 +51,13 @@ class Library
   end
 
   def check_out_book(book_id, borrower)
+    @books.each do |book|
+      if book.id == book_id
+        @borrowers << { borrower => book_id }
+        book.check_out
+      end
+    end
+
   end
 
   def check_in_book(book)
