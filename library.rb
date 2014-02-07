@@ -22,7 +22,12 @@ class Book
   end
 
   def check_in
-    @status = "available"
+    if @status == "checked_out"
+      @status = "available"
+      true
+    else
+      false
+    end
   end
 
 
@@ -52,11 +57,15 @@ class Library
 
   def check_out_book(book_id, borrower)
     @books.each do |book|
-      if book.id == book_id
-        @borrowers << { borrower.name => book_id }
-        book.check_out
+      if book.status == "available"
+        if book.id == book_id
+          @borrowers << { borrower.name => book_id }
+          book.check_out
+          return book
+        end
       end
     end
+    return nil
   end
 
   def get_borrower(book_id)
