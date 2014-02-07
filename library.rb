@@ -2,8 +2,8 @@
 class Book
   attr_reader :title
   attr_reader :author
-  attr_reader :id
-  attr_reader :status
+  attr_accessor :id
+  attr_accessor :status
 
   def initialize(title, author)
     @title = title
@@ -44,7 +44,9 @@ class Library
     @books = []
   end
 
-  def add_book(title, author)
+  def register_new_book(new_book)
+    @books << new_book
+    new_book.id = SecureRandom.uuid
   end
 
   def check_out_book(book_id, borrower)
