@@ -30,7 +30,7 @@ class Book
 end
 
 class Borrower
-  attr_reader :name
+  attr_accessor :name
 
   def initialize(name)
     @name = name
@@ -38,11 +38,10 @@ class Borrower
 end
 
 class Library
-  def initialize(name)
-    @books = []
-  end
+  attr_reader :books
 
-  def books
+  def initialize
+    @books = []
   end
 
   def add_book(title, author)
