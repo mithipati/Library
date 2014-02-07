@@ -68,6 +68,7 @@ class Library
               @borrowers << { borrower.name => book_id }
               @borrower_names << borrower.name
               book.check_out
+              @borrowed_books.push(book)
               @books.delete(book)
               return book
             end
@@ -107,6 +108,6 @@ class Library
   end
 
   def borrowed_books
-
+    @borrowed_books
   end
 end
