@@ -68,6 +68,11 @@ class Library
     return nil
   end
 
+  def check_in_book(book)
+    book.check_in
+  end
+
+
   def get_borrower(book_id)
     @borrowers.each do |borrower_hash|
       borrower_hash.each do |k,v|
@@ -82,8 +87,6 @@ class Library
 
 
 
-  def check_in_book(book)
-  end
 
   def available_books
   end
