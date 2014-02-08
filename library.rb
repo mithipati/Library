@@ -31,7 +31,6 @@ class Book
   end
 
 
-
 end
 
 class Borrower
